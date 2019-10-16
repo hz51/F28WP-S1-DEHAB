@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
+//creates dark grey canvas
 canvas {
 	border: 1px solid #d3d3d3;
 	background-color: #f1f1f1;
@@ -16,11 +17,15 @@ canvas {
 
 var myGamePiece;
 
+//enstantiates the game
 function startGame() {
 	myGameArea.start();
-	myGamePiece = new component(30, 30, "red", 10, 120);
+	
+	//creates player with width, height, colour and coordinates
+	myGamePiece = new component(50, 50, "purple", 100, 12);
 }
 
+//starts the canvas and sets its size, as well as set up the the frame rate and key commands
 var myGameArea = {
 	canvas : document.createElement("canvas"),
 	start : function() {
@@ -43,6 +48,7 @@ this.canvas.height);
 	}
 }
 
+//sets up starting variables for the player
 function component(width, height, color, x, y) {
 	this.gamearea = myGameArea;
 	this.width = width;
@@ -62,6 +68,7 @@ function component(width, height, color, x, y) {
 	}
 }
 
+//Game controller for the arrow keys
 function updateGameArea() {
 	myGameArea.clear()
 	myGamePiece.speedX = 0;
