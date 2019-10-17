@@ -1,3 +1,0 @@
-1. Create grid class: Grid should know if it is empty or what sort of object is on it, and send that information to adjacent squares on the grid
-2. Create generator class: Should only generate on empty squares of the grid 
-3. Create Player class: Player should be able to move and pick up a coin
