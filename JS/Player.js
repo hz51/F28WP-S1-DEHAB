@@ -56,14 +56,17 @@ function updateGameArea() {
 	myGameArea.clear()
 	myGamePiece.speedX = 0;
 	myGamePiece.speedY = 0;
-	if (myGameArea.key && myGameArea.key == 37) {myGamePiece.speedX =
--1; }
-	if (myGameArea.key && myGameArea.key == 39) {myGamePiece.speedX =
-1; }
-	if (myGameArea.key && myGameArea.key == 38) {myGamePiece.speedY =
--1; }
-	if (myGameArea.key && myGameArea.key == 40) {myGamePiece.speedY =
-1; }
+//keys now use W,A,S,D keys to move the player
+// https://codepen.io/tomhodgins/pen/vXmJdw website shows which keycodes for WASD keys
+//changed speed from -1,1,-1,1 to ,-10,10,-10,10 to make player move faster/smoother
+	if (myGameArea.key && myGameArea.key == 65) {myGamePiece.speedX =
+-10; }
+	if (myGameArea.key && myGameArea.key == 68) {myGamePiece.speedX =
+10; }
+	if (myGameArea.key && myGameArea.key == 87) {myGamePiece.speedY =
+-10; }
+	if (myGameArea.key && myGameArea.key == 83) {myGamePiece.speedY =
+10; }
 	myGamePiece.newPos();
 	myGamePiece.update();
 }
