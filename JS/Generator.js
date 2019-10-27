@@ -8,15 +8,20 @@ function checkIsEmpty (){
 }
 
 //rolls a random number generator to determine what the object created is
-function generator(){
-  var RNG = Math.floor(Math.random() * Math.floor(3));
-  if (RNG==1){
-    console.log(placeObject1);
-  } else if (RNG==2){
-    console.log(placeObject2);
-  } else (RNG==3)
-  console.log(placeObject3);
-}
+//set time interval to make random generator every 5 seconds
+setInterval(
+  function generator(){
+    var RNG = Math.floor(Math.random() * Math.floor(3));
+    if (RNG==1){
+      console.log(placeObject1);
+    } else if (RNG==2){
+      console.log(placeObject2);
+    } else if (RNG==3)
+    console.log(placeObject3);
+  
+  } 
+, 5000);
+
 
 //placeholder functions that place an object
 function placeObject1 (){
