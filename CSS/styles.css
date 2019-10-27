@@ -2,11 +2,32 @@
 .grid td {
     cursor:pointer;
     width:50px; height:50px;
-    border:1px solid #ccc;
-    text-align:center;
-    font-family:sans-serif; font-size:13px
+    /*border to purple*/
+    border:1px solid  purple;
+    /*background color of grid*/
+    background-color:#000000
+
+    /*commented out these lines because we wont even have text in our grid*/
+    /*text-align:center;*/
+    /*font-family:sans-serif; font-size:13px*/
 }
 .grid td.empty{
-    background-color:white;
-    font-weight:bold; color:white;
+    /*bg color black*/
+    background-color:#000000;
+    font-weight:bold; color:#000000;
+}
+
+.heading{
+    text-align: center; 
+    font-size: 3.2em;
+    font-weight: 500;
+    color: #000000;
+    /*pixel font*/
+    font-family: 'Press Start 2P', cursive;
+   
+}
+
+body{
+    /*pixel font*/
+    font-family: 'Press Start 2P', cursive;
 }
