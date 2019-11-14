@@ -1,3 +1,11 @@
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+</style>
+</head>
+<body onload="startGame()">
+<script>
 var myGamePiece;
 
 //enstantiates the game
@@ -19,10 +27,11 @@ var myGameArea = {
 document.body.childNodes[0]);
 		this.interval = setInterval(updateGameArea, 20);
 		window.addEventListener('keydown', function (e) {
-			myGameArea.key = e.keyCode;
+			myGameArea.key = (myGameArea.key || []);
+ 			myGameArea.key[e.keyCode] = true;
 		})
 		window.addEventListener('keyup', function (e) {
-			myGameArea.key = false;
+			myGameArea.key[e.keyCode] = false;
 		})
 	},
 	clear : function() {
@@ -59,13 +68,13 @@ function updateGameArea() {
 //keys now use W,A,S,D keys to move the player
 // https://codepen.io/tomhodgins/pen/vXmJdw website shows which keycodes for WASD keys
 //changed speed from -1,1,-1,1 to ,-10,10,-10,10 to make player move faster/smoother
-	if (myGameArea.key && myGameArea.key == 65) {myGamePiece.speedX =
+	if (myGameArea.key && myGameArea.key[65]) {myGamePiece.speedX =
 -10; }
-	if (myGameArea.key && myGameArea.key == 68) {myGamePiece.speedX =
+	if (myGameArea.key && myGameArea.key[68]) {myGamePiece.speedX =
 10; }
-	if (myGameArea.key && myGameArea.key == 87) {myGamePiece.speedY =
+	if (myGameArea.key && myGameArea.key[87]) {myGamePiece.speedY =
 -10; }
-	if (myGameArea.key && myGameArea.key == 83) {myGamePiece.speedY =
+	if (myGameArea.key && myGameArea.key[83]) {myGamePiece.speedY =
 10; }
 	myGamePiece.newPos();
 	myGamePiece.update();
