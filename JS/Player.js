@@ -1,4 +1,4 @@
-//var myGamePiece;
+var myGamePiece;
 var myGameCoin;
 
 //enstantiates the game
@@ -56,6 +56,7 @@ function componentCoin(width, height, color, x, y) {
 		this.x += this.speedX;
 		this.y += this.speedY;
 	}
+	
 }
 
 //sets up starting variables for the player
@@ -67,23 +68,22 @@ function component(width, height, color, x, y) {
 	this.speedY = 0;
 	this.x = x;
 	this.y = y;
-	this.update = function(){
+	this.color = color;
+	//can be used to change the color of the object
+	this.update = function (newColor){
+		this.color = newColor;
 		ctx = myGameArea.context;
-		ctx.fillStyle = color;
+		ctx.fillStyle = newColor;
 		ctx.fillRect(this.x, this.y, this.width, this.height);
 	}
 	this.newPos = function() {
 		this.x += this.speedX;
 		this.y += this.speedY;
 	}
-
+	
 	
 }
 // Sets up 
-
-
-
-
 
 //Game controller for the arrow keys
 function updateGameArea() {
@@ -102,7 +102,22 @@ function updateGameArea() {
 	if (myGameArea.key && myGameArea.key == 83) {myGamePiece.speedY =
 10; }
 	myGamePiece.newPos();
-	myGamePiece.update();
+	myGamePiece.update(myGamePiece.color);
 	myGameCoin.update();
+	hitBox(myGamePiece, myGameCoin);
 }
 
+//detects when the player character object overlaps with the coin 
+function hitBox(source, object){
+	//calls getDistance, compares that to the respective sizes of the shapes (is it less than width+width or height+height)
+	if (getDistance(source.x, source.y, object.x, object.y) < (object.width + source.width) && getDistance(source.x, source.y, object.x, object.y) < (object.height+source.height)){
+		myGamePiece.update('white'); //placeholder effect to signify it works
+	}
+}
+
+//gets the distance between two objects via pythagoras theorem
+function getDistance (x1, y1, x2, y2){
+	let xDist = x2-x1;
+	let yDist = y2-y1;
+	return Math.sqrt( Math.pow(xDist,2) + Math.pow(yDist,2))
+}
