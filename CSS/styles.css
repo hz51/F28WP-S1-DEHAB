@@ -32,3 +32,19 @@ body{
     font-family: 'Press Start 2P', cursive;
     background-color: #000000;
 }
+
+canvas {
+	border: 1px solid purple;
+	background-color: #000000;
+}
+
+#container {
+    width: 600px;
+    height: 700px;
+    position: absolute;
+    border: 1px solid purple;
+    margin: auto;
+    position: relative;
+    text-align: left;
+}
+
