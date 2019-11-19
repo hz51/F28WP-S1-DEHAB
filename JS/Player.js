@@ -7,7 +7,7 @@ function startGame() {
 	
 	//creates player with width, height, colour and coordinates
 	myGamePiece = new component(50, 50, "purple", 100, 200);
-	myGameCoin = new componentCoin(10, 10, "Yellow", 200, 200);
+	myGameCoin = new componentCoin(10, 10, "Yellow", 400, 400);
 	
 
 }
@@ -104,20 +104,28 @@ function updateGameArea() {
 	myGamePiece.newPos();
 	myGamePiece.update(myGamePiece.color);
 	myGameCoin.update();
-	hitBox(myGamePiece, myGameCoin);
-}
-
-//detects when the player character object overlaps with the coin 
-function hitBox(source, object){
-	//calls getDistance, compares that to the respective sizes of the shapes (is it less than width+width or height+height)
-	if (getDistance(source.x, source.y, object.x, object.y) < (object.width + source.width) && getDistance(source.x, source.y, object.x, object.y) < (object.height+source.height)){
-		myGamePiece.update('white'); //placeholder effect to signify it works
+	if (hitBox(myGamePiece, myGameCoin)==true){
+		myGamePiece.update("white")
 	}
 }
 
-//gets the distance between two objects via pythagoras theorem
-function getDistance (x1, y1, x2, y2){
-	let xDist = x2-x1;
-	let yDist = y2-y1;
-	return Math.sqrt( Math.pow(xDist,2) + Math.pow(yDist,2))
+//detects when the player character object overlaps with the coin 
+function hitBox(source, object){ {
+		var myleft = source.x;
+		var myright = source.x + (source.width);
+		var mytop = source.y;
+		var mybottom = source.y + (source.height);
+		var otherleft = object.x;
+		var otherright = object.x + (object.width);
+		var othertop = object.y;
+		var otherbottom = object.y + (object.height);
+		var crash = true;
+		if ((mybottom < othertop) ||
+			(mytop > otherbottom) ||
+			(myright < otherleft) ||
+			(myleft > otherright)) {
+			crash = false;
+		}
+		return crash;
+	}
 }
