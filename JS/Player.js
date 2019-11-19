@@ -104,6 +104,7 @@ function updateGameArea() {
 	myGamePiece.newPos();
 	myGamePiece.update(myGamePiece.color);
 	myGameCoin.update();
+	//calls collision between the two objects
 	if (hitBox(myGamePiece, myGameCoin)==true){
 		myGamePiece.update("white")
 	}
@@ -111,15 +112,18 @@ function updateGameArea() {
 
 //detects when the player character object overlaps with the coin 
 function hitBox(source, object){ {
+	//gets the edges of the player object
 		var myleft = source.x;
 		var myright = source.x + (source.width);
 		var mytop = source.y;
 		var mybottom = source.y + (source.height);
+		//gets the dimentions of the coin
 		var otherleft = object.x;
 		var otherright = object.x + (object.width);
 		var othertop = object.y;
 		var otherbottom = object.y + (object.height);
 		var crash = true;
+		//parameters under which collision is false
 		if ((mybottom < othertop) ||
 			(mytop > otherbottom) ||
 			(myright < otherleft) ||
