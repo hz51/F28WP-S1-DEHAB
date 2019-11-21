@@ -1,5 +1,6 @@
 var myGamePiece;
 var myGameCoin;
+var score;
 
 //enstantiates the game
 function startGame() {
@@ -8,6 +9,7 @@ function startGame() {
 	//creates player with width, height, colour and coordinates
 	myGamePiece = new component(50, 50, "purple", 100, 200);
 	myGameCoin = new componentCoin(10, 10, "Yellow", 400, 400);
+	score = 0;
 	
 
 }
@@ -108,6 +110,7 @@ function updateGameArea() {
 	if (hitBox(myGamePiece, myGameCoin)==true){
 		//placeholder test for collision
 		myGamePiece.update("white")
+		score=score+100;
 	}
 }
 
