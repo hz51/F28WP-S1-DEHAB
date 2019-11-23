@@ -95,6 +95,67 @@ Camera.prototype.follow = function (sprite) {
     sprite.screenX = 0;
     sprite.screenY = 0;
 };
+Camera.prototype.update = function () {
+    // updating the camera
+    this.following.screenX = this.width / 2;
+    this.following.screenY = this.height / 2;
 
-      
-     
+    // make the camera follow the sprite
+    this.x = this.following.x - this.width / 2;
+    this.y = this.following.y - this.height / 2;
+    
+};
+
+function Char(map, x, y) {
+    this.map = map;
+    this.x = x;
+    this.y = y;
+    this.width = 64;
+    this.height = 64;
+    //need to add an image for the char
+    this.image = Loader.getImage('');
+}
+
+Char.SPEED = 256;
+
+Char.prototype.move = function (delta, dirx, diry) {
+    // move character
+    this.x += dirx * 256 * delta;
+    this.y += diry * 256 * delta;
+
+    // check if we walked into a non-walkable tile
+    this._collide(dirx, diry);
+};
+//this needs to be changed
+Char.prototype._collide = function (dirx, diry) {
+    var row, col;
+    var left = this.x - this.width / 2;
+    var right = this.x + this.width / (2 - 1);
+    var top = this.y - this.height / 2;
+    var bottom = this.y + this.height / (2 - 1);
+
+    // check for collisions on sprite sides
+    var collision =
+        this.map.canMoveTileAtXY(left, top) ||
+        this.map.canMoveTileAtXY(right, top) ||
+        this.map.canMoveTileAtXY(right, bottom) ||
+        this.map.canMoveTileAtXY(left, bottom);
+    if (!collision) { return; }
+
+    if (diry > 0) {
+        row = this.map.getRow(bottom);
+        this.y = -this.height / 2 + this.map.getY(row);
+    }
+    else if (diry < 0) {
+        row = this.map.getRow(top);
+        this.y = this.height / 2 + this.map.getY(row + 1);
+    }
+    else if (dirx > 0) {
+        col = this.map.getCol(right);
+        this.x = -this.width / 2 + this.map.getX(col);
+    }
+    else if (dirx < 0) {
+        col = this.map.getCol(left);
+        this.x = this.width / 2 + this.map.getX(col + 1);
+    }
+};
